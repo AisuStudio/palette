@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A palette of agentic engineering projects in various states — CNSL, Fontane, Waffle, Spirit Sprint, Fullerhome.">
+<title>palette · aisu.studio</title>
+<style>
+  :root {
+    --canvas: #EAE6DC;
+    --canvas-raised: #F4F1E9;
+    --ink: #221F1A;
+    --ink-soft: #6C665C;
+    --rule: rgba(34,31,26,0.16);
+    --accent: #3D4E93;
+
+    --cnsl: #3D4E93;
+    --fontane: #7A2E33;
+    --waffle: #B8862E;
+    --spirit: #8C8577;
+    --fullerhome: #3E6B66;
+
+    --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --canvas: #1B1815;
+      --canvas-raised: #221E19;
+      --ink: #EDE8DF;
+      --ink-soft: #ABA398;
+      --rule: rgba(237,232,223,0.16);
+      --accent: #8496D6;
+
+      --cnsl: #8496D6;
+      --fontane: #C97078;
+      --waffle: #E0AC55;
+      --spirit: #A7A093;
+      --fullerhome: #74AFA8;
+    }
+  }
+  :root[data-theme="dark"] {
+    --canvas: #1B1815;
+    --canvas-raised: #221E19;
+    --ink: #EDE8DF;
+    --ink-soft: #ABA398;
+    --rule: rgba(237,232,223,0.16);
+    --accent: #8496D6;
+    --cnsl: #8496D6;
+    --fontane: #C97078;
+    --waffle: #E0AC55;
+    --spirit: #A7A093;
+    --fullerhome: #74AFA8;
+  }
+  :root[data-theme="light"] {
+    --canvas: #EAE6DC;
+    --canvas-raised: #F4F1E9;
+    --ink: #221F1A;
+    --ink-soft: #6C665C;
+    --rule: rgba(34,31,26,0.16);
+    --accent: #3D4E93;
+    --cnsl: #3D4E93;
+    --fontane: #7A2E33;
+    --waffle: #B8862E;
+    --spirit: #8C8577;
+    --fullerhome: #3E6B66;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+
+  .page {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    min-height: 100%;
+    padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 5vw, 2rem) 4rem;
+  }
+
+  .wrap {
+    max-width: 46rem;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1.1rem;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.14;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.25rem;
+    text-wrap: balance;
+    animation: rise 0.6s ease-out both;
+  }
+
+  .intro {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 34rem;
+    margin: 0 0 2.75rem;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    h1 { animation: none; }
+  }
+
+  /* palette strip */
+  .strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.75rem;
+    padding: 1.5rem 1.25rem;
+    margin-bottom: 2.25rem;
+    background: var(--canvas-raised);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+
+  .swatch-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    color: var(--ink-soft);
+  }
+
+  .blob {
+    width: 34px;
+    height: 34px;
+    background: var(--swatch);
+    border-radius: 42% 58% 65% 35% / 45% 45% 55% 55%;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08);
+    transition: transform 0.15s ease;
+  }
+  .swatch-link:hover .blob { transform: scale(1.12); }
+  .swatch-link:focus-visible .blob { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .swatch-name {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* legend */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    margin: 0 0 2rem;
+  }
+  .legend-item { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .legend-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--ink);
+  }
+  .legend-dot.wet { opacity: 0.35; }
+  .legend-dot.curing { opacity: 0.65; }
+  .legend-dot.cured { opacity: 1; }
+
+  /* chart of rows */
+  .chart {
+    border-top: 1px solid var(--rule);
+  }
+
+  .row {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.75rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.15s ease;
+  }
+  .row:hover {
+    background: color-mix(in srgb, var(--swatch) 7%, transparent);
+  }
+
+  .row .blob {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    margin-top: 0.15rem;
+  }
+
+  .row-content { flex: 1; min-width: 0; }
+
+  .row-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.35rem;
+  }
+
+  .row-head h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  .state {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .state-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--swatch);
+  }
+  .state[data-state="wet"] .state-dot { opacity: 0.35; }
+  .state[data-state="curing"] .state-dot { opacity: 0.65; }
+  .state[data-state="cured"] .state-dot { opacity: 1; }
+
+  .row p {
+    margin: 0;
+    color: var(--ink-soft);
+    max-width: 38rem;
+  }
+  .row p.pending {
+    font-style: italic;
+  }
+
+  .row-link {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .row-link:hover { border-bottom-color: var(--accent); }
+
+  @media (max-width: 30rem) {
+    .row { flex-direction: column; gap: 0.9rem; }
+    .row .blob { width: 34px; height: 34px; }
+  }
+
+  footer {
+    margin-top: 3rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.03em;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">palette · aisu.studio</p>
+      <h1>A palette of agentic engineering projects in various states.</h1>
+      <p class="intro">I build AI-native tools with Claude as a genuine collaborator — task managers, type foundries, robot simulations. Some are load-bearing and shipped, some are still wet paint. This is the board where all of them sit side by side.</p>
+    </header>
+
+    <nav class="strip" aria-label="Jump to project">
+      <a class="swatch-link" href="#cnsl"><span class="blob" style="--swatch:var(--cnsl)"></span><span class="swatch-name">CNSL</span></a>
+      <a class="swatch-link" href="#fontane"><span class="blob" style="--swatch:var(--fontane)"></span><span class="swatch-name">Fontane</span></a>
+      <a class="swatch-link" href="#waffle"><span class="blob" style="--swatch:var(--waffle)"></span><span class="swatch-name">Waffle</span></a>
+      <a class="swatch-link" href="#spirit-sprint"><span class="blob" style="--swatch:var(--spirit)"></span><span class="swatch-name">Spirit Sprint</span></a>
+      <a class="swatch-link" href="#fullerhome"><span class="blob" style="--swatch:var(--fullerhome)"></span><span class="swatch-name">Fullerhome</span></a>
+    </nav>
+
+    <p class="legend">
+      <span class="legend-item"><span class="legend-dot wet"></span>Wet — just begun</span>
+      <span class="legend-item"><span class="legend-dot curing"></span>Curing — actively worked</span>
+      <span class="legend-item"><span class="legend-dot cured"></span>Cured — shipped &amp; stable</span>
+    </p>
+
+    <section class="chart">
+      <article class="row" id="cnsl" style="--swatch:var(--cnsl)">
+        <span class="blob"></span>
+        <div class="row-content">
+          <div class="row-head">
+            <h2>CNSL</h2>
+            <span class="state" data-state="curing"><span class="state-dot"></span>Curing</span>
+          </div>
+          <p>A task-management workspace built collaboratively with Claude — tasks, calendar, scheduler, and chat, each shipped as its own tool inside one shared data model.</p>
+          <a class="row-link" href="https://cnsl.aisu.studio/">Open CNSL ↗</a>
+        </div>
+      </article>
+
+      <article class="row" id="fontane" style="--swatch:var(--fontane)">
+        <span class="blob"></span>
+        <div class="row-content">
+          <div class="row-head">
+            <h2>Fontane</h2>
+            <span class="state" data-state="cured"><span class="state-dot"></span>Cured</span>
+          </div>
+          <p>A typeface marketplace with a provenance gate built in — publish, browse, and share fonts with protection against unlicensed reuse baked into the platform.</p>
+          <a class="row-link" href="https://github.com/AisuStudio/fontane">View on GitHub ↗</a>
+        </div>
+      </article>
+
+      <article class="row" id="waffle" style="--swatch:var(--waffle)">
+        <span class="blob"></span>
+        <div class="row-content">
+          <div class="row-head">
+            <h2>Waffle</h2>
+            <span class="state" data-state="cured"><span class="state-dot"></span>Cured</span>
+          </div>
+          <p>The shared design system behind every Aisu.Studio project — tokens, fonts, and a style tile that new builds consume directly and older ones migrate into over time.</p>
+          <a class="row-link" href="https://github.com/AisuStudio/waffle">View on GitHub ↗</a>
+        </div>
+      </article>
+
+      <article class="row" id="spirit-sprint" style="--swatch:var(--spirit)">
+        <span class="blob"></span>
+        <div class="row-content">
+          <div class="row-head">
+            <h2>Spirit Sprint</h2>
+            <span class="state" data-state="wet"><span class="state-dot"></span>Wet</span>
+          </div>
+          <p class="pending">Description pending — placeholder swatch until I hear what this one is.</p>
+        </div>
+      </article>
+
+      <article class="row" id="fullerhome" style="--swatch:var(--fullerhome)">
+        <span class="blob"></span>
+        <div class="row-content">
+          <div class="row-head">
+            <h2>Fullerhome</h2>
+            <span class="state" data-state="curing"><span class="state-dot"></span>Curing</span>
+          </div>
+          <p>A slab-formwork robot simulation built as a portfolio piece for Gropyus — currently in its first narrative-demo stage.</p>
+          <a class="row-link" href="https://aisustudio.github.io/FullerHome/">Open Fullerhome ↗</a>
+        </div>
+      </article>
+    </section>
+
+    <footer>aisu.studio — palette · 2026</footer>
+  </div>
+</div>
+</body>
+</html>
