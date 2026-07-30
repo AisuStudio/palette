@@ -194,6 +194,7 @@
   .legend-dot.early { opacity: 0.35; }
   .legend-dot.working { opacity: 0.65; }
   .legend-dot.mature { opacity: 1; }
+  .legend-dot.sold { background: var(--accent); opacity: 1; }
 
   /* chart of rows */
   .chart {
@@ -245,6 +246,7 @@
   .state[data-state="early"] .state-dot { opacity: 0.35; }
   .state[data-state="working"] .state-dot { opacity: 0.65; }
   .state[data-state="mature"] .state-dot { opacity: 1; }
+  .state[data-state="sold"] .state-dot { opacity: 1; }
 
   .row p {
     margin: 0;
@@ -394,6 +396,7 @@
       <span class="legend-item"><span class="legend-dot early"></span>Early Stage — MVP / research</span>
       <span class="legend-item"><span class="legend-dot working"></span>Working Prototype — functional, still evolving</span>
       <span class="legend-item"><span class="legend-dot mature"></span>Mature Prototype — strong &amp; stable</span>
+      <span class="legend-item"><span class="legend-dot sold"></span>Sold — commissioned by a paying client</span>
     </p>
 
     <section class="chart">
@@ -526,7 +529,7 @@
         <div class="row-content">
           <div class="row-head">
             <h2>Lean Rechner</h2>
-            <span class="state" data-state="early"><span class="state-dot"></span>Early Stage</span>
+            <span class="state" data-state="sold"><span class="state-dot"></span>Sold</span>
           </div>
           <div class="carousel" aria-label="Lean Rechner screenshots">
             <div class="carousel-viewport">
