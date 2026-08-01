@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A palette of agentic engineering projects in various states — Fontane, Lean Rechner, CNSL, Fullerhome, Waffle, Witty, Aisulab, Spirit Sprint, Noveco.">
+<meta name="description" content="A palette of agentic engineering projects in various states — Fontane, Lean Rechner, CNSL, Fullerhome, Waffle, Witty, Aisulab, Spirit Sprint, Noveco, Chillbert.">
 <title>palette · aisu.studio</title>
 <link rel="stylesheet" href="tokens.css">
 <style>
@@ -24,6 +24,7 @@
     --witty: #5B4B9E;
     --aisulab: #6B8E23;
     --noveco: #8A6D3D;
+    --chillbert: #0BA8C4;
   }
 
   /* dark mode is derived from the same waffle tokens (blueberry/vanilla swap
@@ -47,6 +48,7 @@
       --witty: #8B7BC7;
       --aisulab: #9DC94A;
       --noveco: #C9A15E;
+      --chillbert: #00F2FE;
     }
   }
   :root[data-theme="dark"] {
@@ -65,6 +67,7 @@
     --witty: #8B7BC7;
     --aisulab: #9DC94A;
     --noveco: #C9A15E;
+    --chillbert: #00F2FE;
   }
   :root[data-theme="light"] {
     --canvas: var(--color-vanilla);
@@ -82,6 +85,7 @@
     --witty: #5B4B9E;
     --aisulab: #6B8E23;
     --noveco: #8A6D3D;
+    --chillbert: #0BA8C4;
   }
 
   * { box-sizing: border-box; }
@@ -207,6 +211,7 @@
   .legend-dot.working { opacity: 0.65; }
   .legend-dot.mature { opacity: 1; }
   .legend-dot.delivered { background: var(--accent); opacity: 1; }
+  .legend-dot.experiment { background: none; border: 1.5px solid var(--ink-soft); }
 
   /* chart of rows */
   .chart {
@@ -259,6 +264,7 @@
   .state[data-state="working"] .state-dot { opacity: 0.65; }
   .state[data-state="mature"] .state-dot { opacity: 1; }
   .state[data-state="delivered"] .state-dot { opacity: 1; }
+  .state[data-state="experiment"] .state-dot { background: none; border: 1.5px solid var(--swatch); width: 6px; height: 6px; }
 
   .row p {
     margin: 0;
@@ -403,6 +409,7 @@
       <a class="swatch-link" href="#aisulab"><span class="swatch-name">Aisulab</span></a>
       <a class="swatch-link" href="#spirit-sprint"><span class="swatch-name">Spirit Sprint</span></a>
       <a class="swatch-link" href="#noveco"><span class="swatch-name">Noveco</span></a>
+      <a class="swatch-link" href="#chillbert"><span class="swatch-name">Chillbert</span></a>
     </nav>
   </div>
 </header>
@@ -419,6 +426,7 @@
       <span class="legend-item"><span class="legend-dot working"></span>Working Prototype — functional, still evolving</span>
       <span class="legend-item"><span class="legend-dot mature"></span>Mature Prototype — strong &amp; stable</span>
       <span class="legend-item"><span class="legend-dot delivered"></span>Delivered — commissioned by a paying client</span>
+      <span class="legend-item"><span class="legend-dot experiment"></span>Experiment — exploration, not a product</span>
     </p>
 
     <section class="chart">
@@ -646,6 +654,31 @@
           </div>
           <p>An open tool that reads a wildfire site by which reforestation there is at once climate-adapted, economically future-proof, and carbon-effective — Sentinel-2 recovery composites plus a scorecard that judges novel ecosystems by function, not origin.</p>
           <a class="row-link" href="https://aisustudio.github.io/Noveco/">Open Noveco ↗</a>
+        </div>
+      </article>
+
+      <article class="row" id="chillbert" style="--swatch:var(--chillbert)">
+        <div class="row-content">
+          <div class="row-head">
+            <h2>Chillbert</h2>
+            <span class="state" data-state="experiment"><span class="state-dot"></span>Experiment</span>
+          </div>
+          <div class="carousel" aria-label="Chillbert screenshots">
+            <div class="carousel-viewport">
+              <img class="carousel-slide is-active" src="screenshots/chillbert-1.jpg" alt="Chillbert point cloud blending a constellation and a Hilbert-curve sequence placement">
+              <img class="carousel-slide" src="screenshots/chillbert-2.jpg" alt="Chillbert RGB cube mode reading three bytes as one colour">
+              <img class="carousel-slide" src="screenshots/chillbert-3.jpg" alt="Chillbert encrypted vault panel with AES-256-GCM">
+              <button class="carousel-nav prev" type="button" aria-label="Previous screenshot">‹</button>
+              <button class="carousel-nav next" type="button" aria-label="Next screenshot">›</button>
+            </div>
+            <div class="carousel-dots">
+              <button class="carousel-dot is-active" type="button" aria-label="Screenshot 1 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 2 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
+            </div>
+          </div>
+          <p>An experiment in reading data as a place instead of a number — any text, image, or lottery draw mapped into a 3D point cloud, plus a real AES-256 encrypted vault disguised as nothing but itself. Art and craft, not a product.</p>
+          <a class="row-link" href="https://chillbert.vercel.app/">Open Chillbert ↗</a>
         </div>
       </article>
     </section>
