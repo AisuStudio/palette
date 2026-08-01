@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A palette of agentic engineering projects in various states — CNSL, Fontane, Waffle, Spirit Sprint, Fullerhome, Lean Rechner.">
+<meta name="description" content="A palette of agentic engineering projects in various states — Fontane, Lean Rechner, CNSL, Fullerhome, Waffle, Witty, Aisulab, Spirit Sprint, Noveco.">
 <title>palette · aisu.studio</title>
 <link rel="stylesheet" href="tokens.css">
 <style>
@@ -21,6 +21,9 @@
     --spirit: #8C8577;
     --fullerhome: #3E6B66;
     --leanrechner: #FF6948;
+    --witty: #5B4B9E;
+    --aisulab: #6B8E23;
+    --noveco: #8A6D3D;
   }
 
   /* dark mode is derived from the same waffle tokens (blueberry/vanilla swap
@@ -41,6 +44,9 @@
       --spirit: #A7A093;
       --fullerhome: #74AFA8;
       --leanrechner: #FF6948;
+      --witty: #8B7BC7;
+      --aisulab: #9DC94A;
+      --noveco: #C9A15E;
     }
   }
   :root[data-theme="dark"] {
@@ -56,6 +62,9 @@
     --spirit: #A7A093;
     --fullerhome: #74AFA8;
     --leanrechner: #FF6948;
+    --witty: #8B7BC7;
+    --aisulab: #9DC94A;
+    --noveco: #C9A15E;
   }
   :root[data-theme="light"] {
     --canvas: var(--color-vanilla);
@@ -70,6 +79,9 @@
     --spirit: #8C8577;
     --fullerhome: #3E6B66;
     --leanrechner: #FF6948;
+    --witty: #5B4B9E;
+    --aisulab: #6B8E23;
+    --noveco: #8A6D3D;
   }
 
   * { box-sizing: border-box; }
@@ -382,12 +394,15 @@
       <path d="M21.1,1.5c-1.6-1.3-3.8-1.8-5.9-1.3-1.8.4-3.3,1.6-4.2,3.1-.1.2-.3.5-.4.7C4.1,7.7,0,14.6,0,22s2.1,10.7,6,14.6c3.9,3.9,9.1,6,14.6,6s2.5-.1,3.7-.3l.8,1.2c.2.4.6.5,1,.5s.2,0,.3,0c.5-.1.8-.5.9-1.1v-1.5c3-1,5.7-2.7,7.9-4.9,3.9-3.9,6-9.1,6-14.6s-2.1-10.5-5.9-14.4c-3.8-3.9-8.8-6-14.2-6.2M19.1,9.3c-.3-.3-.6-.6-.9-.8.3-.3.6-.6.9-.9.1-.1.2-.3,0-.5-.1-.1-.3-.2-.5,0-.2.1-.4.3-.5.4-.5.4-.8.3-1.6,0-1.3-.5-2.7-.6-4.1-.2-.6.2-1.1.4-1.7.7-.3-1.5,0-3,.7-4.4.8-1.4,2.2-2.4,3.8-2.8,3.3-.8,6.7,1.2,7.5,4.4,0,.1,0,.3,0,.4-.2,0-.5,0-.7,0-.2,0-.3.2-.3.4,0,.2.2.3.4.3,1.4-.1,2.9.3,4.1,1.1,1.2.8,2.1,2.1,2.4,3.5.2.9.3,1.7,0,2.6-.5,0-1.3,0-2.5,0-1.2.1-2.7.3-4.3.7-.3,0-.8-.3-1.1-.9,0-.3,0-.7-.2-1-.1-.4-.3-.8-.4-1.2,0-.2-.3-.2-.4-.2s-.2.3-.2.4c.2.4.3.7.4,1.1.2.7.2,1.4.2,2.2-.4,0-.9.2-1.3.3-2.7.7-5.3,1.5-7.1,2.3-.9.4-1.6.8-2,1.1-.8-.8-1.4-1.8-1.6-2.9-.8-3.3,1.2-6.7,4.4-7.5,2.2-.5,4.4.1,6,1.7.1.1.3.1.5,0,.1-.1.1-.3,0-.5M20.6,42c-5.3,0-10.3-2.1-14.1-5.8-3.8-3.8-5.8-8.8-5.8-14.1S4.3,8.6,10.2,5c-.2.6-.2,1.2-.2,1.9-4.8,3.3-7.9,8.9-7.9,15.2,0,10.2,8.3,18.5,18.5,18.5s1.7,0,2.6-.2l.8,1.3c-1.1.2-2.2.3-3.4.3M27,35.4h-1c0-.1,1.1-.9,1.1-.9v.9ZM27.1,31.8l-2.3-.3,2.4-1.8v2.1ZM27.3,29.3l-2.9,2.2-5.2-.7c-.1,0-.2,0-.2.2,0,.1,0,.2.2.2l4.9.7-3.1,2.3c0,0,0,.2,0,.3,0,0,0,0,.1,0s0,0,.1,0l3.4-2.5,2.7.4v1.9c-.1,0-1.8,1.2-1.8,1.2l-4-.5c-.1,0-.2,0-.2.2,0,.1,0,.2.2.2l3.6.5-2.2,1.6c0,0-.1.2,0,.3,0,0,0,0,.1,0s0,0,.1,0l2.5-1.9,1.5.2-.2,3-.4.3-2.6-.4c-.1,0-.2,0-.2.2,0,.1,0,.2.2.2l2.2.3-1.3,1c0,0-.1.2,0,.3,0,0,0,0,.2,0s0,0,.1,0l1.7-1.2h.3s-.2,3.5-.2,3.5c0,.3-.2.4-.4.4-.2,0-.4,0-.5-.2l-14.4-23.2s0,0,0,0v-.2h-.3c-1.1,0-1.4-.2-1.4-.2,0,0,.1-.2.4-.4.4-.3,1.1-.7,2.3-1.2,1.8-.8,4.2-1.6,6.8-2.2,2.6-.7,5.1-1.1,7.1-1.3,1.6-.2,2.4,0,2.8,0,0,0,0,0,0,0h0c.2,0,.2,0,.3.1,0,0-.2.3-1.1.9h-.2v.3h0s-.7,13.6-.7,13.6h0ZM34.7,36.1c-2.1,2.1-4.6,3.7-7.3,4.7v-1.6c6.9-2.7,11.7-9.4,11.7-17.2S32,4.8,22.9,3.7c-.3-.6-.7-1.1-1.1-1.5,4.9.3,9.5,2.4,13,5.9,3.7,3.7,5.7,8.7,5.7,13.9s-2.1,10.3-5.8,14.1"/>
     </svg>
     <nav aria-label="Jump to project">
-      <a class="swatch-link" href="#cnsl"><span class="swatch-name">CNSL</span></a>
       <a class="swatch-link" href="#fontane"><span class="swatch-name">Fontane</span></a>
-      <a class="swatch-link" href="#waffle"><span class="swatch-name">Waffle</span></a>
-      <a class="swatch-link" href="#spirit-sprint"><span class="swatch-name">Spirit Sprint</span></a>
-      <a class="swatch-link" href="#fullerhome"><span class="swatch-name">Fullerhome</span></a>
       <a class="swatch-link" href="#lean-rechner"><span class="swatch-name">Lean Rechner</span></a>
+      <a class="swatch-link" href="#cnsl"><span class="swatch-name">CNSL</span></a>
+      <a class="swatch-link" href="#fullerhome"><span class="swatch-name">Fullerhome</span></a>
+      <a class="swatch-link" href="#waffle"><span class="swatch-name">Waffle</span></a>
+      <a class="swatch-link" href="#witty"><span class="swatch-name">Witty</span></a>
+      <a class="swatch-link" href="#aisulab"><span class="swatch-name">Aisulab</span></a>
+      <a class="swatch-link" href="#spirit-sprint"><span class="swatch-name">Spirit Sprint</span></a>
+      <a class="swatch-link" href="#noveco"><span class="swatch-name">Noveco</span></a>
     </nav>
   </div>
 </header>
@@ -407,31 +422,6 @@
     </p>
 
     <section class="chart">
-      <article class="row" id="cnsl" style="--swatch:var(--cnsl)">
-        <div class="row-content">
-          <div class="row-head">
-            <h2>CNSL</h2>
-            <span class="state" data-state="mature"><span class="state-dot"></span>Mature Prototype</span>
-          </div>
-          <div class="carousel" aria-label="CNSL screenshots">
-            <div class="carousel-viewport">
-              <img class="carousel-slide is-active" src="screenshots/cnsl-1.jpg" alt="CNSL backlog view with tasks grouped by project">
-              <img class="carousel-slide" src="screenshots/cnsl-2.jpg" alt="CNSL backlog with a task moved to in-progress">
-              <img class="carousel-slide" src="screenshots/cnsl-3.jpg" alt="CNSL calendar month view">
-              <button class="carousel-nav prev" type="button" aria-label="Previous screenshot">‹</button>
-              <button class="carousel-nav next" type="button" aria-label="Next screenshot">›</button>
-            </div>
-            <div class="carousel-dots">
-              <button class="carousel-dot is-active" type="button" aria-label="Screenshot 1 of 3"></button>
-              <button class="carousel-dot" type="button" aria-label="Screenshot 2 of 3"></button>
-              <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
-            </div>
-          </div>
-          <p>A task-management workspace built collaboratively with Claude — tasks, calendar, scheduler, and chat, each shipped as its own tool inside one shared data model.</p>
-          <a class="row-link" href="https://cnsl.aisu.studio/">Open CNSL ↗</a>
-        </div>
-      </article>
-
       <article class="row" id="fontane" style="--swatch:var(--fontane)">
         <div class="row-content">
           <div class="row-head">
@@ -459,17 +449,17 @@
         </div>
       </article>
 
-      <article class="row" id="waffle" style="--swatch:var(--waffle)">
+      <article class="row" id="lean-rechner" style="--swatch:var(--leanrechner)">
         <div class="row-content">
           <div class="row-head">
-            <h2>Waffle</h2>
-            <span class="state" data-state="early"><span class="state-dot"></span>Early Stage</span>
+            <h2>Lean Rechner</h2>
+            <span class="state" data-state="delivered"><span class="state-dot"></span>Delivered</span>
           </div>
-          <div class="carousel" aria-label="Waffle screenshots">
+          <div class="carousel" aria-label="Lean Rechner screenshots">
             <div class="carousel-viewport">
-              <img class="carousel-slide is-active" src="screenshots/waffle-1.jpg" alt="Waffle color token swatches">
-              <img class="carousel-slide" src="screenshots/waffle-2.jpg" alt="Waffle UI pattern library">
-              <img class="carousel-slide" src="screenshots/waffle-3.jpg" alt="Waffle type scale specimen">
+              <img class="carousel-slide is-active" src="screenshots/mns-1.jpg" alt="Lean Rechner hero and simple-mode gauges for schedule reliability and savings">
+              <img class="carousel-slide" src="screenshots/mns-2.jpg" alt="Lean Rechner Profi mode with per-measure activation table for a VOB contract">
+              <img class="carousel-slide" src="screenshots/mns-3.jpg" alt="Lean Rechner dimension breakdown and net savings calculation">
               <button class="carousel-nav prev" type="button" aria-label="Previous screenshot">‹</button>
               <button class="carousel-nav next" type="button" aria-label="Next screenshot">›</button>
             </div>
@@ -479,22 +469,22 @@
               <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
             </div>
           </div>
-          <p>The shared design system behind every Aisu.Studio project — tokens, fonts, and a style tile that new builds consume directly and older ones migrate into over time.</p>
-          <a class="row-link" href="https://github.com/AisuStudio/waffle">View on GitHub ↗</a>
+          <p>A Lean-construction savings calculator built for Meile + Stein — turns a project's budget and planned rigor into an indicative schedule-reliability and savings range, entirely client-side with no data collection.</p>
+          <a class="row-link" href="https://meilestn.de/1003-2/">Open Lean Rechner ↗</a>
         </div>
       </article>
 
-      <article class="row" id="spirit-sprint" style="--swatch:var(--spirit)">
+      <article class="row" id="cnsl" style="--swatch:var(--cnsl)">
         <div class="row-content">
           <div class="row-head">
-            <h2>Spirit Sprint</h2>
-            <span class="state" data-state="early"><span class="state-dot"></span>Early Stage</span>
+            <h2>CNSL</h2>
+            <span class="state" data-state="mature"><span class="state-dot"></span>Mature Prototype</span>
           </div>
-          <div class="carousel" aria-label="Spirit Sprint screenshots">
+          <div class="carousel" aria-label="CNSL screenshots">
             <div class="carousel-viewport">
-              <img class="carousel-slide is-active" src="screenshots/spiritsprint-1.jpg" alt="Spirit Sprint overview map with module progress">
-              <img class="carousel-slide" src="screenshots/spiritsprint-2.jpg" alt="Spirit Sprint Soul module with personality sliders">
-              <img class="carousel-slide" src="screenshots/spiritsprint-3.jpg" alt="Spirit Sprint Business Model Canvas module">
+              <img class="carousel-slide is-active" src="screenshots/cnsl-1.jpg" alt="CNSL backlog view with tasks grouped by project">
+              <img class="carousel-slide" src="screenshots/cnsl-2.jpg" alt="CNSL backlog with a task moved to in-progress">
+              <img class="carousel-slide" src="screenshots/cnsl-3.jpg" alt="CNSL calendar month view">
               <button class="carousel-nav prev" type="button" aria-label="Previous screenshot">‹</button>
               <button class="carousel-nav next" type="button" aria-label="Next screenshot">›</button>
             </div>
@@ -504,8 +494,8 @@
               <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
             </div>
           </div>
-          <p>A self-service version of Aisu.Studio's Soul → Skills → Strategy → Spirit ideation workshop — the framework that used to need a facilitator, now a guided flow a team can run on its own.</p>
-          <a class="row-link" href="https://aisustudio.github.io/spiritsprint/">Open Spirit Sprint ↗</a>
+          <p>A task-management workspace built collaboratively with Claude — tasks, calendar, scheduler, and chat, each shipped as its own tool inside one shared data model.</p>
+          <a class="row-link" href="https://cnsl.aisu.studio/">Open CNSL ↗</a>
         </div>
       </article>
 
@@ -534,17 +524,17 @@
         </div>
       </article>
 
-      <article class="row" id="lean-rechner" style="--swatch:var(--leanrechner)">
+      <article class="row" id="waffle" style="--swatch:var(--waffle)">
         <div class="row-content">
           <div class="row-head">
-            <h2>Lean Rechner</h2>
-            <span class="state" data-state="delivered"><span class="state-dot"></span>Delivered</span>
+            <h2>Waffle</h2>
+            <span class="state" data-state="early"><span class="state-dot"></span>Early Stage</span>
           </div>
-          <div class="carousel" aria-label="Lean Rechner screenshots">
+          <div class="carousel" aria-label="Waffle screenshots">
             <div class="carousel-viewport">
-              <img class="carousel-slide is-active" src="screenshots/mns-1.jpg" alt="Lean Rechner hero and simple-mode gauges for schedule reliability and savings">
-              <img class="carousel-slide" src="screenshots/mns-2.jpg" alt="Lean Rechner Profi mode with per-measure activation table for a VOB contract">
-              <img class="carousel-slide" src="screenshots/mns-3.jpg" alt="Lean Rechner dimension breakdown and net savings calculation">
+              <img class="carousel-slide is-active" src="screenshots/waffle-1.jpg" alt="Waffle color token swatches">
+              <img class="carousel-slide" src="screenshots/waffle-2.jpg" alt="Waffle UI pattern library">
+              <img class="carousel-slide" src="screenshots/waffle-3.jpg" alt="Waffle type scale specimen">
               <button class="carousel-nav prev" type="button" aria-label="Previous screenshot">‹</button>
               <button class="carousel-nav next" type="button" aria-label="Next screenshot">›</button>
             </div>
@@ -554,8 +544,108 @@
               <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
             </div>
           </div>
-          <p>A Lean-construction savings calculator built for Meile + Stein — turns a project's budget and planned rigor into an indicative schedule-reliability and savings range, entirely client-side with no data collection.</p>
-          <a class="row-link" href="https://meilestn.de/1003-2/">Open Lean Rechner ↗</a>
+          <p>The shared design system behind every Aisu.Studio project — tokens, fonts, and a style tile that new builds consume directly and older ones migrate into over time.</p>
+          <a class="row-link" href="https://github.com/AisuStudio/waffle">View on GitHub ↗</a>
+        </div>
+      </article>
+
+      <article class="row" id="witty" style="--swatch:var(--witty)">
+        <div class="row-content">
+          <div class="row-head">
+            <h2>Witty</h2>
+            <span class="state" data-state="early"><span class="state-dot"></span>Early Stage</span>
+          </div>
+          <div class="carousel" aria-label="Witty screenshots">
+            <div class="carousel-viewport">
+              <img class="carousel-slide is-active" src="screenshots/witty-1.jpg" alt="Witty PM audit overview table for the Fontane demo project">
+              <img class="carousel-slide" src="screenshots/witty-2.jpg" alt="Witty Double Diamond phase breakdown">
+              <img class="carousel-slide" src="screenshots/witty-3.jpg" alt="Witty Business Model Canvas and Mini-P&amp;L breakout">
+              <button class="carousel-nav prev" type="button" aria-label="Previous screenshot">‹</button>
+              <button class="carousel-nav next" type="button" aria-label="Next screenshot">›</button>
+            </div>
+            <div class="carousel-dots">
+              <button class="carousel-dot is-active" type="button" aria-label="Screenshot 1 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 2 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
+            </div>
+          </div>
+          <p>A PM mirror, not an exam — reads a project's own docs and git history and names the methods you're already unconsciously practicing, in plain language plus the textbook term. Markdown stays the source of truth; nothing is uploaded.</p>
+          <a class="row-link" href="https://witty.aisu.studio/">Open Witty ↗</a>
+        </div>
+      </article>
+
+      <article class="row" id="aisulab" style="--swatch:var(--aisulab)">
+        <div class="row-content">
+          <div class="row-head">
+            <h2>Aisulab</h2>
+            <span class="state" data-state="working"><span class="state-dot"></span>Working Prototype</span>
+          </div>
+          <div class="carousel" aria-label="Aisulab screenshots">
+            <div class="carousel-viewport">
+              <img class="carousel-slide is-active" src="screenshots/aisulab-1.jpg" alt="Aisulab landing page — digital literacy for kids">
+              <img class="carousel-slide" src="screenshots/aisulab-2.jpg" alt="Aisulab exercises grid">
+              <img class="carousel-slide" src="screenshots/aisulab-3.jpg" alt="Aisulab tools directory">
+              <button class="carousel-nav prev" type="button" aria-label="Previous screenshot">‹</button>
+              <button class="carousel-nav next" type="button" aria-label="Next screenshot">›</button>
+            </div>
+            <div class="carousel-dots">
+              <button class="carousel-dot is-active" type="button" aria-label="Screenshot 1 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 2 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
+            </div>
+          </div>
+          <p>A digital-literacy course for kids — "learn to read the world like a hacker." Small in-person cohorts, exercises running from a Brawl Stars API call to a look under the browser's hood.</p>
+          <a class="row-link" href="https://lab.aisu.studio/">Open Aisulab ↗</a>
+        </div>
+      </article>
+
+      <article class="row" id="spirit-sprint" style="--swatch:var(--spirit)">
+        <div class="row-content">
+          <div class="row-head">
+            <h2>Spirit Sprint</h2>
+            <span class="state" data-state="early"><span class="state-dot"></span>Early Stage</span>
+          </div>
+          <div class="carousel" aria-label="Spirit Sprint screenshots">
+            <div class="carousel-viewport">
+              <img class="carousel-slide is-active" src="screenshots/spiritsprint-1.jpg" alt="Spirit Sprint overview map with module progress">
+              <img class="carousel-slide" src="screenshots/spiritsprint-2.jpg" alt="Spirit Sprint Soul module with personality sliders">
+              <img class="carousel-slide" src="screenshots/spiritsprint-3.jpg" alt="Spirit Sprint Business Model Canvas module">
+              <button class="carousel-nav prev" type="button" aria-label="Previous screenshot">‹</button>
+              <button class="carousel-nav next" type="button" aria-label="Next screenshot">›</button>
+            </div>
+            <div class="carousel-dots">
+              <button class="carousel-dot is-active" type="button" aria-label="Screenshot 1 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 2 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
+            </div>
+          </div>
+          <p>A self-service version of Aisu.Studio's Soul → Skills → Strategy → Spirit ideation workshop — the framework that used to need a facilitator, now a guided flow a team can run on its own.</p>
+          <a class="row-link" href="https://aisustudio.github.io/spiritsprint/">Open Spirit Sprint ↗</a>
+        </div>
+      </article>
+
+      <article class="row" id="noveco" style="--swatch:var(--noveco)">
+        <div class="row-content">
+          <div class="row-head">
+            <h2>Noveco</h2>
+            <span class="state" data-state="early"><span class="state-dot"></span>Early Stage</span>
+          </div>
+          <div class="carousel" aria-label="Noveco screenshots">
+            <div class="carousel-viewport">
+              <img class="carousel-slide is-active" src="screenshots/noveco-1.jpg" alt="Noveco recovery composite for a wildfire site in Brandenburg">
+              <img class="carousel-slide" src="screenshots/noveco-2.jpg" alt="Noveco scorecard comparing cultivated pine forest and neophyte succession">
+              <img class="carousel-slide" src="screenshots/noveco-3.jpg" alt="Noveco measures filtered by actor type">
+              <button class="carousel-nav prev" type="button" aria-label="Previous screenshot">‹</button>
+              <button class="carousel-nav next" type="button" aria-label="Next screenshot">›</button>
+            </div>
+            <div class="carousel-dots">
+              <button class="carousel-dot is-active" type="button" aria-label="Screenshot 1 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 2 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
+            </div>
+          </div>
+          <p>An open tool that reads a wildfire site by which reforestation there is at once climate-adapted, economically future-proof, and carbon-effective — Sentinel-2 recovery composites plus a scorecard that judges novel ecosystems by function, not origin.</p>
+          <a class="row-link" href="https://aisustudio.github.io/Noveco/">Open Noveco ↗</a>
         </div>
       </article>
     </section>
