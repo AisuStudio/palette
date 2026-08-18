@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A palette of agentic engineering projects in various states — Fontane, Lean Rechner, CNSL, Fullerhome, Waffle, Witty, Aisulab, Spirit Sprint, Noveco, Chillbert.">
+<meta name="description" content="A palette of agentic engineering projects in various states — Fontane, Lean Rechner, CNSL, Fullerhome, Waffle, Witty, Aisulab, Spirit Sprint, Fire on the Land, Chillbert, The Canvas is the Message, Pinstars.">
 <title>palette · aisu.studio</title>
 <link rel="stylesheet" href="tokens.css">
 <style>
@@ -23,7 +23,9 @@
     --leanrechner: #FF6948;
     --witty: #5B4B9E;
     --aisulab: #6B8E23;
-    --noveco: #8A6D3D;
+    --fireontheland: #8A6D3D;
+    --tcitm: #A6591B;
+    --pinstars: #1B5FD0;
     --chillbert: #0BA8C4;
   }
 
@@ -47,7 +49,10 @@
       --leanrechner: #FF6948;
       --witty: #8B7BC7;
       --aisulab: #9DC94A;
-      --noveco: #C9A15E;
+      --fireontheland: #C9A15E;
+      --tcitm: #D98B4A;
+    --pinstars: #6FA8FF;
+      --pinstars: #6FA8FF;
       --chillbert: #00F2FE;
     }
   }
@@ -66,7 +71,9 @@
     --leanrechner: #FF6948;
     --witty: #8B7BC7;
     --aisulab: #9DC94A;
-    --noveco: #C9A15E;
+    --fireontheland: #C9A15E;
+    --tcitm: #D98B4A;
+    --pinstars: #6FA8FF;
     --chillbert: #00F2FE;
   }
   :root[data-theme="light"] {
@@ -84,7 +91,9 @@
     --leanrechner: #FF6948;
     --witty: #5B4B9E;
     --aisulab: #6B8E23;
-    --noveco: #8A6D3D;
+    --fireontheland: #8A6D3D;
+    --tcitm: #A6591B;
+    --pinstars: #1B5FD0;
     --chillbert: #0BA8C4;
   }
 
@@ -214,6 +223,22 @@
   .legend-dot.experiment { background: none; border: 1.5px solid var(--ink-soft); }
 
   /* chart of rows */
+  /* group headings — chapter headlines, not eyebrows: the chart is split into
+     work-with-a-user and work-that-is-its-own-point, and each group keeps its
+     own top rule below the headline. */
+  .chart-group {
+    font-family: var(--font-sans);
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 3.25rem 0 0.9rem;
+    padding: 0 1rem;
+  }
+  .chart-group:first-of-type { margin-top: 0; }
+
   .chart {
     border-top: 1px solid var(--rule);
   }
@@ -238,7 +263,7 @@
     margin-bottom: 0.35rem;
   }
 
-  .row-head h2 {
+  .row-head h3 {
     font-family: var(--font-sans);
     font-weight: 700;
     font-size: 1.4rem;
@@ -273,6 +298,36 @@
   }
   .row p.pending {
     font-style: italic;
+  }
+
+  /* built-with — the question every technical reader asks, answered in one
+     mono line so it never weighs down the prose. Same size/colour as the
+     legend, so it reads as apparatus rather than copy. */
+  .built-with {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.75;
+    letter-spacing: 0.03em;
+    color: var(--ink-soft);
+    margin: 0.4rem 0 0.85rem;
+  }
+  .built-with-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-right: 0.55rem;
+  }
+
+  /* one decision, on the projects where the decision is the point */
+  .decision {
+    border-left: 2px solid var(--swatch);
+    padding-left: 0.9rem;
+    margin: 0 0 0.85rem;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+  .decision-label {
+    font-weight: 700;
+    color: var(--ink);
   }
 
   .row-link {
@@ -408,8 +463,10 @@
       <a class="swatch-link" href="#witty"><span class="swatch-name">Witty</span></a>
       <a class="swatch-link" href="#aisulab"><span class="swatch-name">Aisulab</span></a>
       <a class="swatch-link" href="#spirit-sprint"><span class="swatch-name">Spirit Sprint</span></a>
-      <a class="swatch-link" href="#noveco"><span class="swatch-name">Noveco</span></a>
+      <a class="swatch-link" href="#fireontheland"><span class="swatch-name">Fire on the Land</span></a>
       <a class="swatch-link" href="#chillbert"><span class="swatch-name">Chillbert</span></a>
+      <a class="swatch-link" href="#tcitm"><span class="swatch-name">Canvas — Message</span></a>
+      <a class="swatch-link" href="#pinstars"><span class="swatch-name">Pinstars</span></a>
     </nav>
   </div>
 </header>
@@ -429,11 +486,12 @@
       <span class="legend-item"><span class="legend-dot experiment"></span>Experiment — exploration, not a product</span>
     </p>
 
-    <section class="chart">
+    <h2 class="chart-group" id="group-tools">Tools &amp; Products</h2>
+    <section class="chart" aria-labelledby="group-tools">
       <article class="row" id="fontane" style="--swatch:var(--fontane)">
         <div class="row-content">
           <div class="row-head">
-            <h2>Fontane</h2>
+            <h3>Fontane</h3>
             <span class="state" data-state="mature"><span class="state-dot"></span>Mature Prototype</span>
           </div>
           <div class="carousel" aria-label="Fontane screenshots">
@@ -450,17 +508,19 @@
               <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
             </div>
           </div>
-          <p>A typeface marketplace with a provenance gate built in — publish, browse, and share fonts with protection against unlicensed reuse baked into the platform. Ships with its own public, no-login analytics dashboard.</p>
+          <p>A typeface marketplace with a provenance gate built in — publish, browse, and share fonts with protection against unlicensed reuse baked into the platform. Ships with its own cookie-free analytics dashboard, password-protected and open on request.</p>
+          <p class="decision"><span class="decision-label">Hardest call —</span> Guard the marketplace with a publish gate built on server-stamped drawing events instead of accounts — making hobbyists sign up would have cost more than the abuse it prevents.</p>
+          <p class="built-with"><span class="built-with-label">Built with</span>opentype.js · perfect-freehand · Supabase · UFO export + Glyphs plugin · own variable-font build</p>
           <a class="row-link" href="https://github.com/AisuStudio/fontane">View on GitHub ↗</a>
           <span class="row-link-sep">·</span>
-          <a class="row-link" href="https://fontane.studio/anneliese">Custom GDPR Compliant Live Analytics ↗</a>
+          <a class="row-link" href="https://fontane.studio/anneliese">GDPR-compliant live analytics — access on request ↗</a>
         </div>
       </article>
 
       <article class="row" id="lean-rechner" style="--swatch:var(--leanrechner)">
         <div class="row-content">
           <div class="row-head">
-            <h2>Lean Rechner</h2>
+            <h3>Lean Rechner</h3>
             <span class="state" data-state="delivered"><span class="state-dot"></span>Delivered</span>
           </div>
           <div class="carousel" aria-label="Lean Rechner screenshots">
@@ -478,6 +538,7 @@
             </div>
           </div>
           <p>A Lean-construction savings calculator built for Meile + Stein — turns a project's budget and planned rigor into an indicative schedule-reliability and savings range, entirely client-side with no data collection.</p>
+          <p class="built-with"><span class="built-with-label">Built with</span>Web Component · zero runtime dependencies · CSS custom properties · no network calls</p>
           <a class="row-link" href="https://meilestn.de/1003-2/">Open Lean Rechner ↗</a>
         </div>
       </article>
@@ -485,7 +546,7 @@
       <article class="row" id="cnsl" style="--swatch:var(--cnsl)">
         <div class="row-content">
           <div class="row-head">
-            <h2>CNSL</h2>
+            <h3>CNSL</h3>
             <span class="state" data-state="mature"><span class="state-dot"></span>Mature Prototype</span>
           </div>
           <div class="carousel" aria-label="CNSL screenshots">
@@ -503,6 +564,8 @@
             </div>
           </div>
           <p>A task-management workspace built collaboratively with Claude — tasks, calendar, scheduler, and chat, each shipped as its own tool inside one shared data model.</p>
+          <p class="decision"><span class="decision-label">Hardest call —</span> Build the project-as-unit sharing foundation before the share board anyone could actually see, because retrofitting that data model later means a migration under live data.</p>
+          <p class="built-with"><span class="built-with-label">Built with</span>Next.js · Prisma + Supabase · Web Push with VAPID · TipTap · fractional indexing</p>
           <a class="row-link" href="https://cnsl.aisu.studio/">Open CNSL ↗</a>
         </div>
       </article>
@@ -510,7 +573,7 @@
       <article class="row" id="fullerhome" style="--swatch:var(--fullerhome)">
         <div class="row-content">
           <div class="row-head">
-            <h2>Fullerhome</h2>
+            <h3>Fullerhome</h3>
             <span class="state" data-state="working"><span class="state-dot"></span>Working Prototype</span>
           </div>
           <div class="carousel" aria-label="Fullerhome screenshots">
@@ -528,6 +591,8 @@
             </div>
           </div>
           <p>A slab-formwork robot simulation and experiment, built together with construction management service Meile + Stein — currently in its first narrative-demo stage.</p>
+          <p class="decision"><span class="decision-label">Hardest call —</span> Model German public procurement as a rule engine rather than a diagram, so the budget slider produces an award procedure you can argue with instead of an illustration.</p>
+          <p class="built-with"><span class="built-with-label">Built with</span>three.js · React Three Fiber · Zustand · Goldberg plate geometry · VOB/A §3a rule engine</p>
           <a class="row-link" href="https://aisustudio.github.io/FullerHome/">Open Fullerhome ↗</a>
         </div>
       </article>
@@ -535,7 +600,7 @@
       <article class="row" id="waffle" style="--swatch:var(--waffle)">
         <div class="row-content">
           <div class="row-head">
-            <h2>Waffle</h2>
+            <h3>Waffle</h3>
             <span class="state" data-state="early"><span class="state-dot"></span>Early Stage</span>
           </div>
           <div class="carousel" aria-label="Waffle screenshots">
@@ -553,6 +618,7 @@
             </div>
           </div>
           <p>The shared design system behind every Aisu.Studio project — tokens, fonts, and a style tile that new builds consume directly and older ones migrate into over time.</p>
+          <p class="built-with"><span class="built-with-label">Built with</span>CSS custom properties · woff2 · no build step</p>
           <a class="row-link" href="https://github.com/AisuStudio/waffle">View on GitHub ↗</a>
         </div>
       </article>
@@ -560,7 +626,7 @@
       <article class="row" id="witty" style="--swatch:var(--witty)">
         <div class="row-content">
           <div class="row-head">
-            <h2>Witty</h2>
+            <h3>Witty</h3>
             <span class="state" data-state="early"><span class="state-dot"></span>Early Stage</span>
           </div>
           <div class="carousel" aria-label="Witty screenshots">
@@ -578,6 +644,7 @@
             </div>
           </div>
           <p>A PM mirror, not an exam — reads a project's own docs and git history and names the methods you're already unconsciously practicing, in plain language plus the textbook term. Markdown stays the source of truth; nothing is uploaded.</p>
+          <p class="built-with"><span class="built-with-label">Built with</span>LLM facilitation · Markdown as the source of truth · localStorage · Clipboard API</p>
           <a class="row-link" href="https://witty.aisu.studio/">Open Witty ↗</a>
         </div>
       </article>
@@ -585,7 +652,7 @@
       <article class="row" id="aisulab" style="--swatch:var(--aisulab)">
         <div class="row-content">
           <div class="row-head">
-            <h2>Aisulab</h2>
+            <h3>Aisulab</h3>
             <span class="state" data-state="working"><span class="state-dot"></span>Working Prototype</span>
           </div>
           <div class="carousel" aria-label="Aisulab screenshots">
@@ -603,6 +670,7 @@
             </div>
           </div>
           <p>A digital-literacy course for kids — "learn to read the world like a hacker." Small in-person cohorts, exercises running from a Brawl Stars API call to a look under the browser's hood.</p>
+          <p class="built-with"><span class="built-with-label">Built with</span>Brawl Stars API · browser DevTools · HTTP requests by hand</p>
           <a class="row-link" href="https://lab.aisu.studio/">Open Aisulab ↗</a>
         </div>
       </article>
@@ -610,7 +678,7 @@
       <article class="row" id="spirit-sprint" style="--swatch:var(--spirit)">
         <div class="row-content">
           <div class="row-head">
-            <h2>Spirit Sprint</h2>
+            <h3>Spirit Sprint</h3>
             <span class="state" data-state="early"><span class="state-dot"></span>Early Stage</span>
           </div>
           <div class="carousel" aria-label="Spirit Sprint screenshots">
@@ -628,21 +696,26 @@
             </div>
           </div>
           <p>A self-service version of Aisu.Studio's Soul → Skills → Strategy → Spirit ideation workshop — the framework that used to need a facilitator, now a guided flow a team can run on its own.</p>
+          <p class="built-with"><span class="built-with-label">Built with</span>Supabase · vanilla JS · static hosting</p>
           <a class="row-link" href="https://aisustudio.github.io/spiritsprint/">Open Spirit Sprint ↗</a>
         </div>
       </article>
 
-      <article class="row" id="noveco" style="--swatch:var(--noveco)">
+    </section>
+
+    <h2 class="chart-group" id="group-art">Art, Culture &amp; Experiment</h2>
+    <section class="chart" aria-labelledby="group-art">
+      <article class="row" id="fireontheland" style="--swatch:var(--fireontheland)">
         <div class="row-content">
           <div class="row-head">
-            <h2>Noveco</h2>
+            <h3>Fire on the Land</h3>
             <span class="state" data-state="early"><span class="state-dot"></span>Early Stage</span>
           </div>
-          <div class="carousel" aria-label="Noveco screenshots">
+          <div class="carousel" aria-label="Fire on the Land screenshots">
             <div class="carousel-viewport">
-              <img class="carousel-slide is-active" src="screenshots/noveco-1.jpg" alt="Noveco recovery composite for a wildfire site in Brandenburg">
-              <img class="carousel-slide" src="screenshots/noveco-2.jpg" alt="Noveco scorecard comparing cultivated pine forest and neophyte succession">
-              <img class="carousel-slide" src="screenshots/noveco-3.jpg" alt="Noveco measures filtered by actor type">
+              <img class="carousel-slide is-active" src="screenshots/fireontheland-1.jpg" alt="Fire on the Land graphic novel page with the storyboard and script cover">
+              <img class="carousel-slide" src="screenshots/fireontheland-2.jpg" alt="AS Dehcho specimen page showing the hand-lettered display face and Dene diacritics">
+              <img class="carousel-slide" src="screenshots/fireontheland-3.jpg" alt="Adoption Scenarios recovery composite for the Jüterbog burn scar">
               <button class="carousel-nav prev" type="button" aria-label="Previous screenshot">‹</button>
               <button class="carousel-nav next" type="button" aria-label="Next screenshot">›</button>
             </div>
@@ -652,15 +725,15 @@
               <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
             </div>
           </div>
-          <p>An open tool that reads a wildfire site by which reforestation there is at once climate-adapted, economically future-proof, and carbon-effective — Sentinel-2 recovery composites plus a scorecard that judges novel ecosystems by function, not origin.</p>
-          <a class="row-link" href="https://aisustudio.github.io/Noveco/">Open Noveco ↗</a>
+          <p>A graphic novel about rebuilding the measurement tower that scientist Oliver Sonnentag lost to the 2022 wildfire at Scotty Creek — Canada's first Indigenous-led research station — with Dieter Cazon of the Liidlii Kue First Nation as guide and co-author. Around it sit a hand-lettered display face carrying Dene orthography and an open tool that reads post-fire recovery by function, not origin.</p>
+          <p class="built-with"><span class="built-with-label">Built with</span>Sentinel-2 L2A · Copernicus Data Space · canvas compositing · own variable font · History API routing</p>
+          <a class="row-link" href="https://fireontheland.org/">Open Fire on the Land ↗</a>
         </div>
       </article>
-
       <article class="row" id="chillbert" style="--swatch:var(--chillbert)">
         <div class="row-content">
           <div class="row-head">
-            <h2>Chillbert</h2>
+            <h3>Chillbert</h3>
             <span class="state" data-state="experiment"><span class="state-dot"></span>Experiment</span>
           </div>
           <div class="carousel" aria-label="Chillbert screenshots">
@@ -678,7 +751,62 @@
             </div>
           </div>
           <p>An experiment in reading data as a place instead of a number — any text, image, or lottery draw mapped into a 3D point cloud, plus a real AES-256 encrypted vault disguised as nothing but itself. Art and craft, not a product.</p>
+          <p class="built-with"><span class="built-with-label">Built with</span>three.js · WebGL · Web Crypto: PBKDF2 + AES-256-GCM · Hilbert curves</p>
           <a class="row-link" href="https://chillbert.vercel.app/">Open Chillbert ↗</a>
+        </div>
+      </article>
+
+      <article class="row" id="tcitm" style="--swatch:var(--tcitm)">
+        <div class="row-content">
+          <div class="row-head">
+            <h3>The Canvas is the Message</h3>
+            <span class="state" data-state="experiment"><span class="state-dot"></span>Experiment</span>
+          </div>
+          <div class="carousel" aria-label="The Canvas is the Message screenshots">
+            <div class="carousel-viewport">
+              <img class="carousel-slide is-active" src="screenshots/tcitm-1.jpg" alt="The Canvas is the Message title page over a petroglyph rock face">
+              <img class="carousel-slide" src="screenshots/tcitm-2.jpg" alt="The ten attribute dimensions of the canvas, from materiality to sellability">
+              <img class="carousel-slide" src="screenshots/tcitm-3.jpg" alt="Canvas comparator radar chart overlaying whale tooth, standard canvas, cave wall and screen">
+              <button class="carousel-nav prev" type="button" aria-label="Previous screenshot">‹</button>
+              <button class="carousel-nav next" type="button" aria-label="Next screenshot">›</button>
+            </div>
+            <div class="carousel-dots">
+              <button class="carousel-dot is-active" type="button" aria-label="Screenshot 1 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 2 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
+            </div>
+          </div>
+          <p>A concept paper on the picture support as an actor rather than a surface — the neutral canvas as the historical exception, not the rule. Ten attribute dimensions turn that argument into something comparable, and a radar-chart comparator puts a whale tooth, a cave wall and a screen on the same axes.</p>
+          <p class="built-with"><span class="built-with-label">Built with</span>SVG radar comparator · ten attribute axes · no framework</p>
+          <a class="row-link" href="https://aisustudio.github.io/tcitm/en.html">Read the concept ↗</a>
+          <span class="row-link-sep">·</span>
+          <a class="row-link" href="https://aisustudio.github.io/tcitm/komparator.html">Canvas comparator ↗</a>
+        </div>
+      </article>
+
+      <article class="row" id="pinstars" style="--swatch:var(--pinstars)">
+        <div class="row-content">
+          <div class="row-head">
+            <h3>Pinstars</h3>
+            <span class="state" data-state="working"><span class="state-dot"></span>Working Prototype</span>
+          </div>
+          <div class="carousel" aria-label="Pinstars screenshots">
+            <div class="carousel-viewport">
+              <img class="carousel-slide is-active" src="screenshots/pinstars-1.jpg" alt="Pinstars start screen with the new game and instructions buttons">
+              <img class="carousel-slide" src="screenshots/pinstars-2.jpg" alt="Pinstars instructions explaining preparing, playing and solving the quiz tasks">
+              <img class="carousel-slide" src="screenshots/pinstars-3.jpg" alt="Pinstars about page">
+              <button class="carousel-nav prev" type="button" aria-label="Previous screenshot">‹</button>
+              <button class="carousel-nav next" type="button" aria-label="Next screenshot">›</button>
+            </div>
+            <div class="carousel-dots">
+              <button class="carousel-dot is-active" type="button" aria-label="Screenshot 1 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 2 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
+            </div>
+          </div>
+          <p>A treasure-hunt PWA for children's birthdays — one or two teams look for real hiding places on a map, and every pin found hands the next child a quiz question that unlocks the next one. Built for one actual party: no logins, a warm-to-cold distance meter instead of a compass, and a shared finale everybody runs to.</p>
+          <p class="built-with"><span class="built-with-label">Built with</span>Next.js PWA · Leaflet + OpenTopoMap · Geolocation watchPosition · Supabase without login · DE/EN/TR</p>
+          <a class="row-link" href="https://pinstars.aisu.studio/">Open Pinstars ↗</a>
         </div>
       </article>
     </section>
