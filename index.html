@@ -27,6 +27,7 @@
     --tcitm: #A6591B;
     --pinstars: #1B5FD0;
     --chillbert: #0BA8C4;
+    --waitingroom: #0B5CAD;
   }
 
   /* dark mode is derived from the same waffle tokens (blueberry/vanilla swap
@@ -54,6 +55,7 @@
     --pinstars: #6FA8FF;
       --pinstars: #6FA8FF;
       --chillbert: #00F2FE;
+      --waitingroom: #70B8FF;
     }
   }
   :root[data-theme="dark"] {
@@ -75,6 +77,7 @@
     --tcitm: #D98B4A;
     --pinstars: #6FA8FF;
     --chillbert: #00F2FE;
+    --waitingroom: #70B8FF;
   }
   :root[data-theme="light"] {
     --canvas: var(--color-vanilla);
@@ -95,6 +98,7 @@
     --tcitm: #A6591B;
     --pinstars: #1B5FD0;
     --chillbert: #0BA8C4;
+    --waitingroom: #0B5CAD;
   }
 
   * { box-sizing: border-box; }
@@ -463,6 +467,7 @@
       <a class="swatch-link" href="#witty"><span class="swatch-name">Witty</span></a>
       <a class="swatch-link" href="#aisulab"><span class="swatch-name">Aisulab</span></a>
       <a class="swatch-link" href="#spirit-sprint"><span class="swatch-name">Spirit Sprint</span></a>
+      <a class="swatch-link" href="#waitingroom"><span class="swatch-name">Waitingroom</span></a>
       <a class="swatch-link" href="#fireontheland"><span class="swatch-name">Fire on the Land</span></a>
       <a class="swatch-link" href="#chillbert"><span class="swatch-name">Chillbert</span></a>
       <a class="swatch-link" href="#tcitm"><span class="swatch-name">Canvas — Message</span></a>
@@ -701,6 +706,38 @@
         </div>
       </article>
 
+    </section>
+
+    <h2 class="chart-group" id="group-research">Quick Research</h2>
+    <section class="chart" aria-labelledby="group-research">
+      <article class="row" id="waitingroom" style="--swatch:var(--waitingroom)">
+        <div class="row-content">
+          <div class="row-head">
+            <h3>Waitingroom</h3>
+            <span class="state" data-state="working"><span class="state-dot"></span>Working Prototype</span>
+          </div>
+          <div class="carousel" aria-label="Waitingroom screenshots">
+            <div class="carousel-viewport">
+              <img class="carousel-slide is-active" src="screenshots/waitingroom-1.jpg" alt="Waitingroom workbench: the Purpose selection component with a control panel driving its option count past the radio-to-select threshold">
+              <img class="carousel-slide" src="screenshots/waitingroom-2.jpg" alt="The Code tab: a What-you-get contract listing takes, returns and what to render per value, above the framework-neutral snippet">
+              <img class="carousel-slide" src="screenshots/waitingroom-3.jpg" alt="The workflow page: how a requirement becomes a component that can be built without asking back">
+              <button class="carousel-nav prev" type="button" aria-label="Previous screenshot">‹</button>
+              <button class="carousel-nav next" type="button" aria-label="Next screenshot">›</button>
+            </div>
+            <div class="carousel-dots">
+              <button class="carousel-dot is-active" type="button" aria-label="Screenshot 1 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 2 of 3"></button>
+              <button class="carousel-dot" type="button" aria-label="Screenshot 3 of 3"></button>
+            </div>
+          </div>
+          <p>A holding room for UI behaviour rules — the layer component libraries don't ship: when five options become a select, what a withdrawn form field remembers, how a name shrinks before a column may cut it. Each rule is one file that drives the live prototype, the readable rule text and the code snippet, so changing a threshold changes all three. Built in two days as a handover probe between a designer's Figma and an engineer's stack.</p>
+          <p class="decision"><span class="decision-label">Hardest call —</span> Explicitly not production code. The previous attempt at this handover died of looking like a delivery and being judged as one — so the waitingroom is a specification instrument, and says so on every page.</p>
+          <p class="built-with"><span class="built-with-label">Built with</span>vanilla ES modules · no build step · Radix Colors, verified · Figma variables + component descriptions · two audit scripts (repo + Figma)</p>
+          <a class="row-link" href="https://waitingroom.aisu.studio">Open Waitingroom ↗</a>
+          <span class="row-link-sep">·</span>
+          <a class="row-link" href="https://github.com/AisuStudio/waitingroom">View on GitHub ↗</a>
+        </div>
+      </article>
     </section>
 
     <h2 class="chart-group" id="group-art">Art, Culture &amp; Experiment</h2>
