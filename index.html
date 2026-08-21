@@ -139,7 +139,10 @@
   .site-nav nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
+    /* tighter than the old 0.5rem/1.5rem because every link now carries pill
+       padding of its own — the gap plus that padding lands back at the same
+       optical spacing between labels. */
+    gap: 0.25rem 0.6rem;
   }
 
   .logo-mark {
@@ -253,10 +256,16 @@
     h1 { animation: none; }
   }
 
+  /* every link carries the pill's padding and radius at all times, only the
+     fill is transparent — otherwise activating one would resize it and reflow
+     the whole nav on every scroll past a project boundary. */
   .swatch-link {
     text-decoration: none;
     color: color-mix(in srgb, var(--color-blueberry) 55%, transparent);
     border-bottom: 1px solid transparent;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    background: transparent;
   }
   .swatch-link:hover {
     color: var(--color-blueberry);
@@ -265,11 +274,20 @@
   .swatch-link:focus-visible { outline: 2px solid var(--color-grape); outline-offset: 3px; }
 
   /* the sticky nav also answers "where am I": the project currently under the
-     header keeps full ink and a solid rule. Colour and rule only — bolding a
-     mono face would change its width and reflow the whole nav mid-scroll. */
+     header wears a strawberry-2 pill. Fill and ink only — bolding a mono face
+     would change its width and reflow the whole nav mid-scroll.
+     Blueberry on strawberry-2 is 6.6:1, so these 10.5px labels clear AA.
+     Note this is a deliberate exception to the rule in tokens.css that flavor
+     ramps encode content and never style chrome. */
   .swatch-link[aria-current="location"] {
     color: var(--color-blueberry);
-    border-bottom-color: var(--color-blueberry);
+    background: var(--color-strawberry-2);
+    border-bottom-color: transparent;
+  }
+  /* the pill already marks it — don't add the hover underline on top */
+  .swatch-link[aria-current="location"]:hover {
+    color: var(--color-blueberry);
+    border-bottom-color: transparent;
   }
 
   .swatch-name {
