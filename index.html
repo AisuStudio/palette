@@ -262,14 +262,19 @@
   .swatch-link {
     text-decoration: none;
     color: color-mix(in srgb, var(--color-blueberry) 55%, transparent);
-    border-bottom: 1px solid transparent;
     padding: 0.2rem 0.5rem;
     border-radius: 999px;
     background: transparent;
+    transition: background 0.15s ease, color 0.15s ease;
   }
+  /* hover and current wear the same pill and differ only in fill, so the shape
+     means "a project" and the colour means which state it is in.
+     Blueberry on hazelnut is 6.13:1. (Hazelnut is only safe as a fill here —
+     as text on vanilla it is 2.6:1, which is why tokens.css darkens it for
+     --color-muted.) */
   .swatch-link:hover {
     color: var(--color-blueberry);
-    border-bottom-color: color-mix(in srgb, var(--color-blueberry) 30%, transparent);
+    background: var(--color-hazelnut);
   }
   .swatch-link:focus-visible { outline: 2px solid var(--color-grape); outline-offset: 3px; }
 
@@ -282,12 +287,11 @@
   .swatch-link[aria-current="location"] {
     color: var(--color-blueberry);
     background: var(--color-strawberry-2);
-    border-bottom-color: transparent;
   }
-  /* the pill already marks it — don't add the hover underline on top */
+  /* where you are outranks where the pointer is: hovering the current project
+     must not repaint it as an ordinary hover target */
   .swatch-link[aria-current="location"]:hover {
-    color: var(--color-blueberry);
-    border-bottom-color: transparent;
+    background: var(--color-strawberry-2);
   }
 
   .swatch-name {
