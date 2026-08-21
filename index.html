@@ -468,12 +468,6 @@
     font-size: 0.72rem;
   }
 
-  /* one rhythm for the whole row: every block gets the same air above it, so
-     description, decision, built-with and links never sit tighter against each
-     other than the link already sat under built-with. Must stay AFTER the rules
-     above — same specificity, so source order decides the margin-top. */
-  .row-content > * { margin-top: 0.9rem; }
-  .row-content > :first-child { margin-top: 0; }
 
   /* screenshot carousel */
   .carousel {
@@ -541,6 +535,15 @@
     cursor: pointer;
   }
   .carousel-dot.is-active { background: var(--swatch); }
+
+  /* One rhythm for the whole row: a blank line above every block, so
+     description, decision, built-with and links all breathe the same amount.
+     Scoped through .row and placed last on purpose — a bare `.row-content > *`
+     loses to `.row p { margin: 0 }`, which is more specific, and to the
+     `.carousel` rule below it; both silently zeroed this out before.
+     --sp-lg is the project's own spacing step, not a number picked here. */
+  .row .row-content > * { margin-top: var(--sp-lg); }
+  .row .row-content > :first-child { margin-top: 0; }
 
 
   footer {
