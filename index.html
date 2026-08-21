@@ -144,7 +144,7 @@
 
   .logo-mark {
     display: block;
-    height: 22px;
+    height: 44px;
     width: auto;
     flex: none;
     color: var(--color-blueberry);
@@ -264,6 +264,14 @@
   }
   .swatch-link:focus-visible { outline: 2px solid var(--color-grape); outline-offset: 3px; }
 
+  /* the sticky nav also answers "where am I": the project currently under the
+     header keeps full ink and a solid rule. Colour and rule only — bolding a
+     mono face would change its width and reflow the whole nav mid-scroll. */
+  .swatch-link[aria-current="location"] {
+    color: var(--color-blueberry);
+    border-bottom-color: var(--color-blueberry);
+  }
+
   .swatch-name {
     font-family: var(--font-mono);
     font-size: 0.66rem;
@@ -290,7 +298,18 @@
   .legend-dot.early { opacity: 0.35; }
   .legend-dot.working { opacity: 0.65; }
   .legend-dot.mature { opacity: 1; }
-  .legend-dot.delivered { background: var(--accent); opacity: 1; }
+  /* The legend is the key for the STAGE, so every legend dot stays neutral ink
+     and lets opacity and form carry the stage. On a project row the identical
+     form is filled with that project's swatch, which carries identity. Delivered
+     used to break this by going accent here and swatch on the row — the same
+     stage in two colours. It gets a ring instead: a form, readable in both. */
+  /* the ring is a box-shadow, so it takes no layout width — pay the label back
+     the space it optically eats, here and on the row chip below. */
+  .legend-dot.delivered {
+    opacity: 1;
+    box-shadow: 0 0 0 2px var(--canvas), 0 0 0 3.5px var(--ink);
+    margin-right: 3px;
+  }
   .legend-dot.experiment { background: none; border: 1.5px solid var(--ink-soft); }
 
   /* chart of rows */
@@ -316,6 +335,9 @@
 
   .row {
     padding: 1.75rem 1rem;
+    /* --nav-h is measured in JS; the fallback keeps jumped-to rows clear of the
+       sticky header even before the script runs. */
+    scroll-margin-top: calc(var(--nav-h, 5rem) + 1.25rem);
     border-bottom: 1px solid var(--rule);
     transition: background 0.15s ease;
   }
@@ -331,7 +353,6 @@
     justify-content: space-between;
     gap: 1rem;
     flex-wrap: wrap;
-    margin-bottom: 0.35rem;
   }
 
   .row-head h3 {
@@ -359,7 +380,11 @@
   .state[data-state="early"] .state-dot { opacity: 0.35; }
   .state[data-state="working"] .state-dot { opacity: 0.65; }
   .state[data-state="mature"] .state-dot { opacity: 1; }
-  .state[data-state="delivered"] .state-dot { opacity: 1; }
+  .state[data-state="delivered"] .state-dot {
+    opacity: 1;
+    box-shadow: 0 0 0 2px var(--canvas), 0 0 0 3.5px var(--swatch);
+    margin-right: 3px;
+  }
   .state[data-state="experiment"] .state-dot { background: none; border: 1.5px solid var(--swatch); width: 6px; height: 6px; }
 
   .row p {
@@ -380,7 +405,7 @@
     line-height: 1.75;
     letter-spacing: 0.03em;
     color: var(--ink-soft);
-    margin: 0.4rem 0 0.85rem;
+    margin: 0;
   }
   .built-with-label {
     text-transform: uppercase;
@@ -392,7 +417,7 @@
   .decision {
     border-left: 2px solid var(--swatch);
     padding-left: 0.9rem;
-    margin: 0 0 0.85rem;
+    margin: 0;
     font-size: 0.95rem;
     color: var(--ink-soft);
   }
@@ -403,7 +428,6 @@
 
   .row-link {
     display: inline-block;
-    margin-top: 0.6rem;
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.03em;
@@ -414,15 +438,22 @@
   .row-link:hover { border-bottom-color: var(--accent); }
   .row-link-sep {
     display: inline-block;
-    margin: 0.6rem 0.5rem 0;
+    margin: 0 0.5rem;
     color: var(--ink-soft);
     font-family: var(--font-mono);
     font-size: 0.72rem;
   }
 
+  /* one rhythm for the whole row: every block gets the same air above it, so
+     description, decision, built-with and links never sit tighter against each
+     other than the link already sat under built-with. Must stay AFTER the rules
+     above — same specificity, so source order decides the margin-top. */
+  .row-content > * { margin-top: 0.9rem; }
+  .row-content > :first-child { margin-top: 0; }
+
   /* screenshot carousel */
   .carousel {
-    margin: 0.85rem 0 1.15rem;
+    margin: 0;
     max-width: 30rem;
   }
   .carousel-viewport {
@@ -557,7 +588,7 @@
                  repo — palette only holds the board. Compute per project as
                  (first commit → first deploy) and drop the median in here. -->
             <dd class="metric-value"><span class="todo">··</span> days</dd>
-            <dd class="metric-note">median, n=13 · fastest: 2 (Waitingroom)</dd>
+            <dd class="metric-note">median, n=13 · fastest: Waitingroom, ~7 h of build time</dd>
           </div>
           <div class="metric">
             <dt>Live, in someone else's hands</dt>
@@ -567,7 +598,7 @@
           <div class="metric">
             <dt>Domains entered from zero</dt>
             <dd class="metric-value">9</dd>
-            <dd class="metric-note">glyph outlines · WebGL · Sentinel-2 raster · procurement law</dd>
+            <dd class="metric-note">glyph outlines · WebGL · Sentinel-2 raster</dd>
           </div>
         </dl>
         <p class="metrics-method">Architecture, product calls and review are mine; implementation is agentic. Where a project makes a claim it can be wrong about, it carries its own check — Waitingroom audits its rules against Figma and the repo on every commit.</p>
@@ -960,6 +991,54 @@
     carousel.querySelector('.next').addEventListener('click', function () { show(index + 1); });
     dots.forEach(function (dot, j) { dot.addEventListener('click', function () { show(j); }); });
   });
+
+  // Scrollspy for the sticky nav: mark the project you are currently reading.
+  (function () {
+    var nav = document.querySelector('.site-nav');
+    var targets = Array.prototype.slice
+      .call(nav.querySelectorAll('a[href^="#"]'))
+      .map(function (link) {
+        return { link: link, el: document.getElementById(link.getAttribute('href').slice(1)) };
+      })
+      .filter(function (t) { return t.el; });
+    if (!targets.length) return;
+
+    var current = null;
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var navHeight = nav.offsetHeight;
+      document.documentElement.style.setProperty('--nav-h', navHeight + 'px');
+
+      // a row becomes current once its top passes just under the sticky header
+      var line = navHeight + 24;
+      var active = null;
+      targets.forEach(function (t) {
+        if (t.el.getBoundingClientRect().top <= line) active = t;
+      });
+      // at the very bottom the last row can never reach the line on its own,
+      // so hand it the mark explicitly rather than leaving the nav stale
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        active = targets[targets.length - 1];
+      }
+
+      if (active === current) return;
+      if (current) current.link.removeAttribute('aria-current');
+      if (active) active.link.setAttribute('aria-current', 'location');
+      current = active;
+    }
+
+    function schedule() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    update();
+  })();
 </script>
 </body>
 </html>
