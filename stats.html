@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>palette · visit analytics</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  :root {
+    --canvas: var(--color-vanilla);
+    --canvas-raised: var(--color-cappuccino);
+    --ink: var(--color-blueberry);
+    --ink-soft: var(--color-muted);
+    --rule: color-mix(in srgb, var(--color-blueberry) 16%, transparent);
+    --accent: var(--color-grape);
+    /* one flavor, one step per theme — 4.16:1 on vanilla. Flavor ramps are the
+       tier tokens.css reserves for encoding meaning in content, which is what a
+       data mark is. */
+    --mark: var(--color-pistachio-5);
+    --track: color-mix(in srgb, var(--color-blueberry) 8%, transparent);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --canvas: var(--color-blueberry);
+      --canvas-raised: color-mix(in srgb, var(--color-blueberry) 82%, var(--color-vanilla) 18%);
+      --ink: var(--color-vanilla);
+      --ink-soft: color-mix(in srgb, var(--color-vanilla) 62%, var(--color-blueberry) 38%);
+      --rule: color-mix(in srgb, var(--color-vanilla) 16%, transparent);
+      --accent: color-mix(in srgb, var(--color-grape) 55%, var(--color-vanilla) 45%);
+      /* the dark step is chosen from the same ramp, not flipped — 11.5:1 */
+      --mark: var(--color-pistachio-1);
+      --track: color-mix(in srgb, var(--color-vanilla) 10%, transparent);
+    }
+  }
+  :root[data-theme="dark"] {
+    --canvas: var(--color-blueberry);
+    --canvas-raised: color-mix(in srgb, var(--color-blueberry) 82%, var(--color-vanilla) 18%);
+    --ink: var(--color-vanilla);
+    --ink-soft: color-mix(in srgb, var(--color-vanilla) 62%, var(--color-blueberry) 38%);
+    --rule: color-mix(in srgb, var(--color-vanilla) 16%, transparent);
+    --accent: color-mix(in srgb, var(--color-grape) 55%, var(--color-vanilla) 45%);
+    --mark: var(--color-pistachio-1);
+    --track: color-mix(in srgb, var(--color-vanilla) 10%, transparent);
+  }
+
+  * { box-sizing: border-box; }
+  /* the UA rule for [hidden] is display:none at element level, which any class
+     setting display — .gate is a flex column — silently beats. Without this the
+     sign-in form stays on screen next to the dashboard it just unlocked. */
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+    padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 5vw, 2rem) 4rem;
+  }
+  .wrap { max-width: 52rem; margin: 0 auto; }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.9rem;
+  }
+  h1 {
+    font-weight: 700;
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    line-height: 1.15;
+    margin: 0 0 0.9rem;
+    text-wrap: balance;
+  }
+  h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 0.2rem;
+  }
+  .lede { color: var(--ink-soft); max-width: 36rem; margin: 0 0 2rem; }
+
+  /* gate */
+  .gate { max-width: 22rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  input {
+    width: 100%;
+    font: inherit;
+    color: var(--ink);
+    background: var(--canvas-raised);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 0.5rem 0.7rem;
+  }
+  button {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--color-vanilla);
+    background: var(--color-grape);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+  }
+  button.ghost {
+    color: var(--ink-soft);
+    background: transparent;
+    border-color: var(--rule);
+  }
+  button.ghost[aria-pressed="true"] {
+    color: var(--ink);
+    background: var(--canvas-raised);
+    border-color: transparent;
+  }
+  input:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .error { color: var(--color-strawberry-5); font-size: 0.9rem; margin: 0; }
+
+  /* filters sit in one row above the charts */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .filters .spacer { flex: 1; }
+
+  /* KPI row */
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 1.5rem 2rem;
+    margin: 0 0 2.75rem;
+  }
+  .kpi dt {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.3rem;
+  }
+  /* proportional figures: tabular-nums is for columns that align, and makes a
+     display-size number look loose */
+  .kpi dd {
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.2vw, 1.85rem);
+    line-height: 1.1;
+    margin: 0;
+  }
+  .kpi .sub {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+    margin-top: 0.2rem;
+  }
+
+  section { margin-bottom: 2.75rem; }
+  .hint { color: var(--ink-soft); font-size: 0.9rem; margin: 0 0 1rem; }
+
+  /* bars — one hue for every bar. The category is named by its own label, so
+     hue carries nothing and must not double-encode the length. */
+  .bars { display: flex; flex-direction: column; gap: 0.5rem; }
+  .bar-row {
+    display: grid;
+    grid-template-columns: minmax(6rem, 11rem) 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+  .bar-label {
+    color: var(--ink-soft);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .bar-track {
+    background: var(--track);
+    border-radius: 3px;
+    height: 12px;
+    position: relative;
+  }
+  .bar-fill {
+    background: var(--mark);
+    border-radius: 0 4px 4px 0;
+    height: 100%;
+    min-width: 2px;
+  }
+  .bar-value { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .bar-row:hover .bar-label { color: var(--ink); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+  th, td {
+    text-align: left;
+    padding: 0.35rem 0.75rem 0.35rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  td:last-child, th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  details { margin-top: 0.9rem; }
+  summary {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .empty { color: var(--ink-soft); font-style: italic; font-size: 0.9rem; }
+
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">palette · aisu.studio</p>
+  <h1>Visit analytics</h1>
+  <p class="lede">Cookie-free, storage-free measurement of this board: where visitors arrive from, how long they stay, and which project carousels they open.</p>
+
+  <form class="gate" id="gate">
+    <div>
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="username" required>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+    </div>
+    <div><button type="submit">Sign in</button></div>
+    <p class="error" id="gate-error" hidden></p>
+  </form>
+
+  <main id="dash" hidden>
+    <div class="filters">
+      <button class="ghost" type="button" data-days="7" aria-pressed="false">7 days</button>
+      <button class="ghost" type="button" data-days="30" aria-pressed="true">30 days</button>
+      <button class="ghost" type="button" data-days="90" aria-pressed="false">90 days</button>
+      <span class="spacer"></span>
+      <button class="ghost" type="button" id="signout">Sign out</button>
+    </div>
+
+    <dl class="kpis" id="kpis"></dl>
+
+    <section>
+      <h2>Channels</h2>
+      <p class="hint">Referrer hostname only — never the full URL, so nothing about the visitor's search or path is kept.</p>
+      <div id="channels"></div>
+    </section>
+
+    <section>
+      <h2>Time on page</h2>
+      <p class="hint">Counts only the time the tab was actually visible, so a page left open in the background does not read as attention.</p>
+      <div id="dwell"></div>
+    </section>
+
+    <section>
+      <h2>Carousels opened</h2>
+      <p class="hint">One event per arrow or dot click, attributed to the project row it sits in.</p>
+      <div id="carousels"></div>
+    </section>
+
+    <footer>
+      No cookies, no localStorage, no sessionStorage — the visit id lives in memory and dies with the page.<br>
+      No IP address and no user-agent string is stored; the referrer is reduced to its hostname.<br>
+      Returning visitors are therefore not recognisable, and no visitor can be re-identified from this data.
+    </footer>
+  </main>
+</div>
+
+<script src="analytics-config.js"></script>
+<script>
+(function () {
+  var cfg = window.PALETTE_ANALYTICS;
+  var base = cfg.url.replace(/\/$/, '');
+  // in memory only, like the tracker — a reload signs you out, which is the
+  // honest cost of a dashboard that writes nothing to the device either.
+  var token = null;
+  var rows = [];
+  var days = 30;
+
+  var gate = document.getElementById('gate');
+  var gateError = document.getElementById('gate-error');
+  var dash = document.getElementById('dash');
+
+  gate.addEventListener('submit', function (e) {
+    e.preventDefault();
+    gateError.hidden = true;
+    fetch(base + '/auth/v1/token?grant_type=password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: cfg.anonKey },
+      body: JSON.stringify({
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+      }),
+    })
+      .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, body: b }; }); })
+      .then(function (res) {
+        if (!res.ok || !res.body.access_token) throw new Error(res.body.error_description || 'Sign-in failed.');
+        token = res.body.access_token;
+        gate.hidden = true;
+        dash.hidden = false;
+        load();
+      })
+      .catch(function (err) {
+        gateError.textContent = err.message;
+        gateError.hidden = false;
+      });
+  });
+
+  document.getElementById('signout').addEventListener('click', function () {
+    token = null;
+    rows = [];
+    dash.hidden = true;
+    gate.hidden = false;
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-days]'), function (button) {
+    button.addEventListener('click', function () {
+      days = Number(button.dataset.days);
+      Array.prototype.forEach.call(document.querySelectorAll('[data-days]'), function (other) {
+        other.setAttribute('aria-pressed', String(other === button));
+      });
+      load();
+    });
+  });
+
+  function load() {
+    var from = new Date(Date.now() - days * 86400000).toISOString();
+    fetch(base + '/rest/v1/' + cfg.table +
+          '?select=kind,session,channel,project,slide,dwell_ms,created_at' +
+          '&created_at=gte.' + from + '&order=created_at.desc&limit=50000', {
+      headers: { apikey: cfg.anonKey, Authorization: 'Bearer ' + token },
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) { rows = Array.isArray(data) ? data : []; render(); })
+      .catch(function () { rows = []; render(); });
+  }
+
+  function tally(list) {
+    var map = {};
+    list.forEach(function (key) { map[key] = (map[key] || 0) + 1; });
+    return Object.keys(map)
+      .map(function (key) { return { label: key, value: map[key] }; })
+      .sort(function (a, b) { return b.value - a.value; });
+  }
+
+  function median(values) {
+    if (!values.length) return 0;
+    var sorted = values.slice().sort(function (a, b) { return a - b; });
+    var mid = Math.floor(sorted.length / 2);
+    return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+  }
+
+  function duration(ms) {
+    var s = Math.round(ms / 1000);
+    if (s < 60) return s + 's';
+    var m = Math.floor(s / 60);
+    return m + 'm ' + (s % 60) + 's';
+  }
+
+  // bars, plus the same numbers as a table — identity is never colour alone,
+  // and a screen reader gets the real values rather than a row of divs
+  function bars(node, items, unit) {
+    if (!items.length) {
+      node.innerHTML = '<p class="empty">No events in this range yet.</p>';
+      return;
+    }
+    // over all items, not items[0] — the distribution below is in time order,
+    // not sorted by size, so the first bucket is rarely the tallest
+    var max = items.reduce(function (m, item) { return Math.max(m, item.value); }, 0);
+    if (max === 0) {
+      node.innerHTML = '<p class="empty">No events in this range yet.</p>';
+      return;
+    }
+    var list = document.createElement('div');
+    list.className = 'bars';
+    items.forEach(function (item) {
+      var row = document.createElement('div');
+      row.className = 'bar-row';
+      row.title = item.label + ': ' + item.value + ' ' + unit;
+
+      var label = document.createElement('span');
+      label.className = 'bar-label';
+      label.textContent = item.label;
+
+      var track = document.createElement('span');
+      track.className = 'bar-track';
+      var fill = document.createElement('span');
+      fill.className = 'bar-fill';
+      fill.style.display = 'block';
+      fill.style.width = Math.max(2, Math.round((item.value / max) * 100)) + '%';
+      track.appendChild(fill);
+
+      var value = document.createElement('span');
+      value.className = 'bar-value';
+      value.textContent = item.value;
+
+      row.append(label, track, value);
+      list.appendChild(row);
+    });
+
+    var details = document.createElement('details');
+    var rowsHtml = items.map(function (item) {
+      return '<tr><td>' + item.label + '</td><td>' + item.value + '</td></tr>';
+    }).join('');
+    details.innerHTML = '<summary>Show as table</summary>' +
+      '<table><thead><tr><th>Label</th><th>' + unit + '</th></tr></thead><tbody>' +
+      rowsHtml + '</tbody></table>';
+
+    node.replaceChildren(list, details);
+  }
+
+  var BUCKETS = [
+    ['under 10s', 0, 10000],
+    ['10–30s', 10000, 30000],
+    ['30s–1m', 30000, 60000],
+    ['1–3m', 60000, 180000],
+    ['3–10m', 180000, 600000],
+    ['over 10m', 600000, Infinity],
+  ];
+
+  function render() {
+    var views = rows.filter(function (r) { return r.kind === 'view'; });
+    var clicks = rows.filter(function (r) { return r.kind === 'carousel'; });
+
+    // A visit reports its running dwell each time the page goes away, so one
+    // session can have several rows. The last one is the whole visit — keep the
+    // largest per session rather than counting each report as its own visit.
+    var best = {};
+    rows.forEach(function (r) {
+      if (r.kind !== 'leave' || r.dwell_ms == null) return;
+      if (!(r.session in best) || r.dwell_ms > best[r.session]) best[r.session] = r.dwell_ms;
+    });
+    var leaves = Object.keys(best).map(function (session) { return { dwell_ms: best[session] }; });
+
+    document.getElementById('kpis').innerHTML = [
+      ['Visits', views.length, days + ' days'],
+      ['Median time on page', leaves.length ? duration(median(leaves.map(function (r) { return r.dwell_ms; }))) : '—',
+        'n=' + leaves.length],
+      ['Carousels opened', clicks.length,
+        views.length ? (clicks.length / views.length).toFixed(1) + ' per visit' : '—'],
+    ].map(function (kpi) {
+      return '<div class="kpi"><dt>' + kpi[0] + '</dt><dd>' + kpi[1] +
+             '<div class="sub">' + kpi[2] + '</div></dd></div>';
+    }).join('');
+
+    bars(document.getElementById('channels'),
+      tally(views.map(function (r) { return r.channel || 'unknown'; })), 'visits');
+
+    var durations = leaves.map(function (r) { return r.dwell_ms; });
+    bars(document.getElementById('dwell'),
+      // kept in time order, never sorted by size: the shape of the
+      // distribution is the point, and re-sorting destroys it
+      BUCKETS.map(function (bucket) {
+        return {
+          label: bucket[0],
+          value: durations.filter(function (d) { return d >= bucket[1] && d < bucket[2]; }).length,
+        };
+      }),
+      'visits');
+
+    bars(document.getElementById('carousels'),
+      tally(clicks.map(function (r) { return r.project || 'unknown'; })), 'clicks');
+  }
+})();
+</script>
+</body>
+</html>
