@@ -268,13 +268,15 @@
     transition: background 0.15s ease, color 0.15s ease;
   }
   /* hover and current wear the same pill and differ only in fill, so the shape
-     means "a project" and the colour means which state it is in.
-     Blueberry on hazelnut is 6.13:1. (Hazelnut is only safe as a fill here —
-     as text on vanilla it is 2.6:1, which is why tokens.css darkens it for
-     --color-muted.) */
+     means "a project" and the colour means which state it is in. Cappuccino is
+     the surface token, which is what tokens.css actually reserves for chrome:
+     blueberry on it is 11.7:1, and the fill sits a quiet 1.18:1 off the header's
+     vanilla — a confirmation under the pointer, not a second marker competing
+     with the current-project pill. The raw token, not the --canvas-raised
+     alias, because this header stays vanilla in both themes. */
   .swatch-link:hover {
     color: var(--color-blueberry);
-    background: var(--color-hazelnut);
+    background: var(--color-cappuccino);
   }
   .swatch-link:focus-visible { outline: 2px solid var(--color-grape); outline-offset: 3px; }
 
