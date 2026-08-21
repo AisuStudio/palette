@@ -175,7 +175,74 @@
     font-size: 1.1rem;
     color: var(--ink-soft);
     max-width: 34rem;
-    margin: 0 0 2.75rem;
+    margin: 0 0 2rem;
+  }
+
+  /* lower hero: three numbers a technical reader takes into the interview.
+     each answers a different objection — is it fast, is it real, can he
+     repeat it — so they must not all measure output volume. Text tokens
+     only, no accent fills: the board below owns the colour. */
+  .metrics {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 1.4rem 0 1.25rem;
+    margin: 0 0 2.5rem;
+  }
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1.5rem 2rem;
+    margin: 0;
+  }
+  .metric dt {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.35rem;
+  }
+  /* proportional figures on purpose — tabular-nums only earns its place in
+     columns that align vertically, and makes a display-size number look loose. */
+  .metric-value {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.2vw, 1.85rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 0.3rem;
+  }
+  .metric-note {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .metrics-method {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    max-width: 38rem;
+    margin: 1.5rem 0 0;
+  }
+  .metrics-asof {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0.7rem 0 0;
+  }
+
+  /* DRAFT ONLY — marks a value that is not yet measured, so an unfilled
+     placeholder can never quietly ship as a real number. Delete this rule
+     and every .todo class once the values are in. */
+  .todo {
+    color: var(--accent);
+    border-bottom: 1px dotted var(--accent);
   }
 
   @keyframes rise {
@@ -481,6 +548,32 @@
       <p class="eyebrow">palette · aisu.studio</p>
       <h1>A palette of agentic engineering projects in various states.</h1>
       <p class="intro">I build AI-native tools with Claude as a genuine collaborator — task managers, type foundries, robot simulations. Some are load-bearing and shipped, some are still wet paint. This is the board where all of them sit side by side.</p>
+
+      <section class="metrics" aria-label="How this board measures up">
+        <dl class="metrics-grid">
+          <div class="metric">
+            <dt>First commit → public URL</dt>
+            <!-- TODO: median across the 13 project repos. Not derivable from this
+                 repo — palette only holds the board. Compute per project as
+                 (first commit → first deploy) and drop the median in here. -->
+            <dd class="metric-value"><span class="todo">··</span> days</dd>
+            <dd class="metric-note">median, n=13 · fastest: 2 (Waitingroom)</dd>
+          </div>
+          <div class="metric">
+            <dt>Live, in someone else's hands</dt>
+            <dd class="metric-value">12 of 13</dd>
+            <dd class="metric-note">publicly reachable · 1 commissioned and paid</dd>
+          </div>
+          <div class="metric">
+            <dt>Domains entered from zero</dt>
+            <dd class="metric-value">9</dd>
+            <dd class="metric-note">glyph outlines · WebGL · Sentinel-2 raster · procurement law</dd>
+          </div>
+        </dl>
+        <p class="metrics-method">Architecture, product calls and review are mine; implementation is agentic. Where a project makes a claim it can be wrong about, it carries its own check — Waitingroom audits its rules against Figma and the repo on every commit.</p>
+        <!-- TODO: month of the earliest project's first commit (not this repo's). -->
+        <p class="metrics-asof">As of August 2026 · 13 projects since <span class="todo">··</span></p>
+      </section>
     </header>
 
     <p class="legend">
